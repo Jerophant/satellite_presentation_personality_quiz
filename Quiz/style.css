@@ -19,7 +19,7 @@ body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
-.question, .results, .challenge{
+.question, .results, .challenge {
   padding: 30px 20px;
   font-size: clamp(16px, 4vw, 18px);
   background: rgba(153, 170, 170, 0.05);
@@ -62,5 +62,6 @@ body {
   outline: none;
   box-shadow: 0 0 0 3px rgba(153,170,170,0.5);
 }
+
 
 
