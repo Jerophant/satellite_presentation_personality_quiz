@@ -7,6 +7,7 @@ body {
   padding-bottom: 100px;
   font-size: 16px; /* Base size for mobile */
   line-height: 1.6;
+  margin-bottom: 100px;
 }
 
 .title {
@@ -19,7 +20,7 @@ body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
-.question, .results, .challenge {
+.question, .results, .challenge{
   padding: 30px 20px;
   font-size: clamp(16px, 4vw, 18px);
   background: rgba(153, 170, 170, 0.05);
@@ -64,4 +65,116 @@ body {
 }
 
 
+
+/* FAKE DATABASE ADDS */
+
+/* FILTERS ehmmmmm....*/
+/* .filters {
+  background: rgba(153, 170, 170, 0.08);
+  padding: 25px;
+  border-radius: 16px;
+  margin: 30px 0;
+  border-left: 5px solid #99aaaa;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+} */
+
+
+
+.filters input, .filters select, .add-new input, .add-new select { 
+  padding: 14px 18px;
+  margin: 10px;
+  margin-bottom: 20px;
+  background: rgba(153, 170, 170, 0.12);
+  border: 2px solid rgba(153, 170, 170, 0.3);
+  border-radius: 12px;
+  color: #99aaaa;
+  font-size: 16px;
+  flex: 1;
+  min-width: 200px;
+  transition: all 0.3s ease;
+}
+
+.filters input:focus, .filters select:focus {
+  border-color: #7bb8b8;
+  box-shadow: 0 0 0 4px rgba(123, 184, 184, 0.2);
+}
+
+.filters input:hover, .filters select:hover, .add-new input:hover, .add-new select:hover {
+  opacity: 0.6;
+}
+
+
+
+
+
+
+
+
+.button {
+  background: linear-gradient(45deg, #99aaaa, #7bb8b8);
+  color: #132238;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(153,170,170,0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 160px;
+  margin-bottom: 30px;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(153,170,170,0.6);
+  background: linear-gradient(45deg, #7bb8b8, #99aaaa);
+}
+
+.button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(153,170,170,0.4);
+}
+
+/* GRID & CARDS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.card {
+  background: rgba(153, 170, 170, 0.12);
+  padding: 25px;
+  border-radius: 16px;
+  border-left: 5px solid #99aaaa;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(153, 170, 170, 0.2);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(153,170,170,0.3);
+  border-color: rgba(123, 184, 184, 0.4);
+}
+
+.card h3 {
+  margin: 0 0 15px 0;
+  font-size: clamp(18px, 3vw, 22px);
+  color: #7bb8b8;
+}
+
+.card p {
+  margin: 12px 0;
+  font-size: 15px;
+}
+
+.card strong {
+  color: #99aaaa;
+}
 
