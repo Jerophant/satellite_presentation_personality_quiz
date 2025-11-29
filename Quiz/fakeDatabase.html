@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>🛰️ Satellite Database</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+    <div class="container">
+      <h1 class="title">🛰️ Satellite Database</h1>
+    
+
+    <!-- ADD A NEW SATELLITE FORM -->
+     <div class="add-new">
+      <h2>Add New Satellite</h2>
+      <input id="name" placeholder="Satellite Name">
+      <select id="orbit">
+        <option>LEO</option>
+        <option>MEO</option>
+        <option>GEO</option>
+      </select>
+      <input id="mission" placeholder="Mission">
+      <input id="country" placeholder="Country">
+      <button class="button" onclick="addSatellite()">Add Satellite</button>
+     </div>
+
+     <!-- FILTERS -->
+      <div class="filters">
+         <h2>Search for a Satellite</h2>
+        <input id="search" placeholder="Search satellites..." oninput="filterSatellites()">
+        <select id="orbitFilter" onchange="filterSatellites()">
+          <option value="">All Orbits</option>
+          <option value="LEO">LEO</option>
+          <option value="MEO">MEO</option>
+          <option value="GEO">GEO</option>
+        </select>
+        <button class="button" onclick="clearFilters()">Clear FIlters</button>
+      </div>
+
+      <!-- DATABASE RESULTS -->
+       <div id="satellites" class="grid"></div>
+
+    </div>
+
+
+    <!-- --------------------------------------------------------------- -->
+    <!-- --------------------------------------------------------------- -->
+
+    <script>
+      // DATABASE
+      let satellites = []
+
+      // LOAD DATABASE FROM localStorage
+      function loadDatabase() {
+        const saved = localStorage.getItem('satelliteDB');
+        if (saved) satellites = JSON.parse(saved);
+        else {
+          // DEFAULT SATELLITES
+          satellites = [
+            {
+              id: 1, name: "Starlink-1234", orbit: "LEO", mission: "Navigation", country: "USA", launch: "2024"
+            },
+            {
+              id: 2, name: "GPS-IIF-12", orbit: "MEO", mission: "Navigation", country: "USA", launch: "2019"
+            },
+            {
+              id: 3, name: "Intelsat 39", orbit: "GEO", mission: "Communication", country: "Luxembourg", launch: "2019"
+            },
+            {
+              id: 4, name: "Viasat KA-SAT", orbit: "GEO", mission: "Internet", country: "USA", launch: "2010"
+            },
+            {
+              id: 5, name: "Fengyun-1C", orbit: "Polar", mission: "Weather", country: "China", launch: "1999"
+            }
+          ];
+          saveDatabase();
+        }
+        displaySatellites(satellites);
+      }
+
+      // SAVE DATABASE TO localStorage
+      function saveDatabase() {
+        localStorage.setItem('satelliteDB', JSON.stringify(satellites));
+      }
+
+      // ADD SATELLITE (CREATE)
+      function addSatellite(){
+        const name = document.getElementById('name').value;
+        const orbit = document.getElementById('orbit').value;
+        const mission = document.getElementById('mission').value;
+        const country = document.getElementById('country').value;
+
+        if (name && mission && country) {
+          const newSat = {
+            id: Date.now(), // UNIQUE ID
+            name, orbit, mission, country, launch: new Date().getFullYear().toString()
+          };
+          satellites.unshift(newSat); // ADD TO BEGINNING
+          saveDatabase();
+          displaySatellites(satellites);
+          clearForm();
+        }
+        else {
+          alert('Please fill all fields!');
+        }
+      }
+
+      // DELETE SATELLITE
+      // function deleteSatellite(id) {
+      //   satellites = satellites.filter(sat => sat.id != id);
+      //   saveDatabase();
+      //   displaySatellites(satellites);
+      // }
+
+      // DISPLAY SATELLITES
+      function displaySatellites(data) {
+        document.getElementById('satellites').innerHTML = data.map(sat =>`
+        <div class="card">
+          <h3>${sat.name}</h3>
+          <p><strong>Orbit:</strong> ${sat.orbit}</p>
+          <p><strong>Mission:</strong> ${sat.mission}</p>
+          <p><strong>Country:</strong> ${sat.country}</p>
+          <p><strong>Launched:</strong> ${sat.launch}</p>
+          <!--<button onclick="deleteSatellite(${sat.id})" style="background:#ff6b6b;color:white;float:right;">Delete</button> -->
+          <br>
+          </div>
+        `).join('');
+      }
+
+      // Filter satellites (READ with search)
+      function filterSatellites() {
+        const search = document.getElementById('search').value.toLowerCase();
+        const orbit = document.getElementById('orbitFilter').value;
+        
+        const filtered = satellites.filter(sat => 
+          (!orbit || sat.orbit === orbit) &&
+          (sat.name.toLowerCase().includes(search) || 
+          sat.mission.toLowerCase().includes(search) ||
+          sat.country.toLowerCase().includes(search))
+        );
+        displaySatellites(filtered);
+      }
+
+      function clearFilters() {
+        document.getElementById('search').value = '';
+        document.getElementById('orbitFilter').value = '';
+        displaySatellites(satellites);
+      }
+
+      function clearForm() {
+        document.getElementById('name').value = '';
+        document.getElementById('mission').value = '';
+        document.getElementById('country').value = '';
+      }
+
+      // START DATABASE
+      loadDatabase();
+
+
+    </script>
+
+  </body>
+</html>
