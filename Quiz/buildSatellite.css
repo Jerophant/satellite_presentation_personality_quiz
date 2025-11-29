@@ -1,0 +1,20 @@
+.satellite-card { 
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white; 
+  padding: 30px; 
+  border-radius: 20px; 
+  box-shadow: 0 20px 60px rgba(0,50,100,0.4);
+  backdrop-filter: blur(10px);
+  margin: 12px;
+}
+.satellite-desc { 
+  font-size: 18px; 
+  line-height: 1.6; 
+  margin: 20px 0;
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 12px;
+}
+.button {
+  margin: 8px;
+}
